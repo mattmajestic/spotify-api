@@ -19,8 +19,10 @@ jobs:
       - name: Docker Hub Login
         run: |
           echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u mattmajestic --password-stdin
+        env:
+          DOCKER_BUILDKIT: 1  # Set this environment variable for buildx
 
       - name: Spotify API ~ Build and Push 
         run: |
           docker buildx create --use
-          docker buildx build -t mattmajestic/spotify-api:latest -f Dockerfile --push
+          docker buildx build -t mattmajestic/spotify-api:latest -f Dockerfile . --push
