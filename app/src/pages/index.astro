@@ -1,0 +1,105 @@
+---
+// Import the SpotifyWebApi package
+import SpotifyWebApi from 'spotify-web-api-node';
+
+// Load environment variables from .env file
+import dotenv from 'dotenv';
+dotenv.config();
+
+// Define your Spotify API credentials
+const clientId = process.env.SPOTIPY_CLIENT_ID;
+const clientSecret = process.env.SPOTIPY_CLIENT_SECRET;
+
+// Create a new Spotify API client
+const spotifyApi = new SpotifyWebApi({
+	clientId: clientId,
+	clientSecret: clientSecret,
+});
+
+// Define the artist ID
+const artistId = '4q3ewBCX7sLwd24euuV69X';
+
+// Request an access token and fetch the artist data
+let data;
+try {
+	const dataResponse = await spotifyApi.clientCredentialsGrant();
+	spotifyApi.setAccessToken(dataResponse.body['access_token']);
+	data = await spotifyApi.getArtist(artistId);
+} catch (err) {
+	console.log('Something went wrong!', err);
+}
+---
+
+<!-- Use the data in your component -->
+<div id="app" class="dark">
+	<h1>Spotify AstroJS </h1>
+	<button id="themeButton">Light</button>
+	<form id="artistForm">
+		<label>
+			<input type="radio" name="artistId" value="4q3ewBCX7sLwd24euuV69X">
+			Bad Bunny
+		</label>
+	</form>
+	<div class="content">
+		<h2 style="font-size: 2em;">{data.body.name}</h2>
+		<p style="font-size: 1.5em;">Followers: {data.body.followers.total.toLocaleString()}</p>
+		<img src={data.body.images[0]?.url} alt={data.body.name} />
+	</div>
+</div>
+
+<!-- Include the CSS -->
+<style>
+	#app {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+		background-color: black;
+		color: white;
+		text-align: center;
+	}
+
+	#app.light {
+		background-color: white;
+		color: black;
+	}
+
+	#themeButton {
+		margin-bottom: 20px;
+	}
+</style>
+
+<!-- Include the JavaScript -->
+<script>
+	const app = document.getElementById('app');
+	const themeButton = document.getElementById('themeButton');
+
+	themeButton.addEventListener('click', () => {
+		if (app.classList.contains('dark')) {
+			app.classList.remove('dark');
+			app.classList.add('light');
+			themeButton.textContent = '🌞';
+		} else {
+			app.classList.remove('light');
+			app.classList.add('dark');
+			themeButton.textContent = '🌝';
+		}
+	});
+	document.querySelectorAll('input[name="artistId"]').forEach((radioButton) => {
+		radioButton.addEventListener('change', async () => {
+			// Get the selected artist ID
+			const artistId = document.querySelector('input[name="artistId"]:checked').value;
+
+			// Fetch the artist data
+			const response = await fetch(`/api/artist/${artistId}`);
+			const data = await response.json();
+
+			// Update the page with the new data
+			document.querySelector('h2').textContent = data.body.name;
+			document.querySelector('p').textContent = `Followers: ${data.body.followers.total.toLocaleString()}`;
+			document.querySelector('img').src = data.body.images[0]?.url;
+			document.querySelector('img').alt = data.body.name;
+		});
+	});
+</script>
