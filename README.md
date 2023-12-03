@@ -1,4 +1,4 @@
-# Spotify API in Python in 1 Minute 🎵
+# Spotify API in Python's FastAPI 🎵
 
 ## App Functionality 🚀
 
