@@ -25,4 +25,4 @@ jobs:
       - name: Spotify API ~ Build and Push 
         run: |
           docker buildx create --use
-          docker buildx build -t mattmajestic/spotify-api:latest -f Dockerfile . --push
+          docker buildx build -t mattmajestic/spotify-api:latest -f ./api/Dockerfile . --push

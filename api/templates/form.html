@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify API with Python's FastAPI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        label, input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spotify API with Python's FastAPI</h1>
+    <form action="/get_artist" method="get">
+        <label for="artist_id">Artist ID:</label>
+        <input type="text" id="artist_id" name="artist_id" value="4q3ewBCX7sLwd24euuV69X">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
