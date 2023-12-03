@@ -1,12 +1,31 @@
-# 🎵 Spotify API with Astro JS 🚀
+# Spotify API in Python in 1 Minute 🎵
 
-## Spotify API
+## App Functionality 🚀
 
-The Spotify API provides access to a rich set of resources like albums, artists, and playlists. This project uses the Spotify API to fetch and display data about artists, albums, and tracks.
+🎵 Retrieve artist statistics from Spotify:
+  - Fetch the number of monthly listeners for a specific artist.
+  - Access essential artist data and insights.
 
-## Astro JS
+🔑 Secure Spotify API Access:
+  - Utilize `spotipy` library for secure access.
+  - Load API credentials from environment variables.
 
-Astro.js is a front-end framework for building fast, optimized websites and applications. This project is built with Astro.js, demonstrating its capabilities in integrating with third-party APIs like Spotify.
+🎤 Easy-to-Use FastAPI Application:
+  - Simple and user-friendly FastAPI-based interface.
+  - Query by artist's Spotify ID to get quick statistics.
+
+## Quick Start 🏃‍♂️
+
+1. Set your Spotify API credentials in the `.env` file.
+2. Install required dependencies using `pip install -r requirements.txt`.
+3. Run the application with `uvicorn`.
+
+## Usage 🎯
+
+- Access artist statistics by sending a GET request to `/get_artist_stats?artist_id=<spotify_artist_id>`.
+- Retrieve monthly listeners and other artist data effortlessly.
+
+---
 
 ## Subscribe and Stay Tuned! 🎉
 
